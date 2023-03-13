@@ -7,7 +7,8 @@ const colors = {
 };
 
 export const CardContainer = styled.div`
-  height: 410px;
+  height: auto;
+  /* height: 410px; */
   width: 300px;
   background-color: white;
   box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);

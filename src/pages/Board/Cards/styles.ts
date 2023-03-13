@@ -7,10 +7,10 @@ const colors = {
 };
 
 export const Container = styled.div`
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
-  align-items: center;
-  gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: stretch;
+
+  gap: 40px;
 `;
 

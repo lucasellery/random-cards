@@ -1,34 +1,36 @@
 import { CardContainer, CardHeader, Footer, Logo, Main, Points } from "./styles";
 
 export interface CardProps {
+  id: number;
+  points: number;
   name: string;
+  image?: string;
   description?: string;
-  imageUrl: string;
-  _id: number;
 }
 
-export function Card({ name, imageUrl, description, _id}: CardProps) {
+export function Card({ name, image, description, id, points }: CardProps) {
   return (
-    <CardContainer key={_id}>
+    <CardContainer key={id}>
       <CardHeader>
         <Logo>
           <b>R</b>
           <span>C</span>
         </Logo>
         <Points>
-          10
+          {points}
         </Points>
       </CardHeader>
       <Main>
         <img
-          src={imageUrl}
-          alt=""
+          src={image}
+          alt="Comic card"
           width='auto'
+          height={350}
         />
       </Main>
       <Footer>
         <span>{name}</span>
-        <span>Escreverei uma descrição aqui</span>
+        <span>{description}</span>
       </Footer>
     </CardContainer>
   )

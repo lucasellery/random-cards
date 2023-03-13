@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 interface ButtonProps {
   disabled?: boolean;
+  color?: string;
 }
 
 export const ButtonContainer = styled.button<ButtonProps>`
@@ -11,8 +12,7 @@ export const ButtonContainer = styled.button<ButtonProps>`
   border-radius: 44px;
   padding: 14px 28px;
 
-  background: ${((disabled) => disabled ? '#ccc' : '#72FADC')};
-  background: ${props => (props.disabled ? '#ccc' : '#72FADC')};
+  background: ${props => (props.disabled ? '#ccc' : props.color)};
 
   color: #333;
   font-weight: 600;

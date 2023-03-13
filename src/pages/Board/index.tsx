@@ -1,16 +1,17 @@
-import { useContext } from 'react';
-import { UserNameContext, UserNameProvider } from '../../context/UserContext';
+import { Button } from '../../components/Button';
+import { Cards } from './Cards';
 import { HeaderBoard } from './HeaderBoard';
-import { Container } from './styles';
+import { ButtonsContainer, Container } from './styles';
 
 export function Board() {
-  const { userName, setUserName } = useContext(UserNameContext);
-
   return (
-    <UserNameProvider>
-      <Container>
-        <HeaderBoard />
-      </Container>
-    </UserNameProvider>
+    <Container>
+      <HeaderBoard />
+      <ButtonsContainer>
+        <Button buttonType='button' color='#ffffff'>Emabaralhar</Button>
+        <Button buttonType='button' color='#72FADC'>Puxar nova carta</Button>
+      </ButtonsContainer>
+      <Cards />
+    </Container>
   )
 }

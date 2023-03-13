@@ -51,6 +51,7 @@ export function Home() {
             <Button
               buttonType="submit"
               disabled={!userName || userName.length < 3}
+              color='#72FADC'
             >
               Ver cartas
             </Button>

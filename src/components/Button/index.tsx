@@ -5,7 +5,7 @@ interface ButtonProps {
   buttonType: "button" | "submit" | "reset";
   disabled?: boolean;
   color?: string;
-  onClick?: () => void;
+  onClick: () => void;
 }
 
 export function Button({ buttonType, children, disabled, color, onClick }: ButtonProps) {

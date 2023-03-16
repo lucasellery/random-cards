@@ -6,6 +6,7 @@ export type CardType = {
     extension: string;
     path: string;
   };
+  points: number;
 }
 
 export type CardResponse = {

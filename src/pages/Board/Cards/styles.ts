@@ -1,16 +1,15 @@
 import styled from 'styled-components';
 
-const colors = {
-  primary: '#F78764',
-  secondary: '#666666',
-  tertiary: '#ECF0F1',
-};
-
 export const Container = styled.div`
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  align-items: stretch;
+  display: flex;
+  justify-content: space-around;
+  flex-flow: row wrap;
   gap: 40px;
+`;
+
+export const CardContainer = styled.div`
+  display: flex;
+  width: 100%;
 `;
 
 export const LoadingContainer = styled.div`

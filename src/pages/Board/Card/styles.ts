@@ -8,8 +8,7 @@ const colors = {
 
 export const CardContainer = styled.div`
   height: auto;
-  /* height: 410px; */
-  width: 300px;
+  width: calc(23% - 36px);
   background-color: white;
   box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
   border-radius: 14px;
@@ -80,4 +79,22 @@ export const Footer = styled.footer`
     font-weight: 500;
     font-size: 0.8rem;
   }
+`;
+
+export const PopoverContent = styled.p`
+  z-index: 5;
+  color: #fff;
+  width: 400px;
+  position: absolute;
+  left: 50%;
+  bottom: 15px;
+  transform: translateX(-50%);
+  transition: opacity 0.3s ease;
+
+  background-color: #010101;
+  padding: 10px;
+  /* border: 1px solid #ccc; */
+  border: none;
+  border-radius: 5px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
 `;

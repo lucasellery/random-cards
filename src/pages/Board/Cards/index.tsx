@@ -1,19 +1,16 @@
-import { Card, CardProps } from "../Card";
+import { Card } from "../Card";
 import { Container, LoadingContainer } from "./styles";
-import { getRandomPoint } from "../../../utils/shuffle";
 import { CardResponse, CardType } from "../../../types/Card";
-import { animated } from '@react-spring/web';
-import { useEffect } from "react";
 import { ThreeCircles } from "react-loader-spinner";
+import { useSpring, animated } from '@react-spring/web';
 
 interface CardsProps {
   cards: CardResponse | null;
   randomCards: CardResponse["data"]["results"];
   transitions: any;
-  shuffledCards: number[];
 }
 
-export function Cards({ cards, randomCards, transitions, shuffledCards }: CardsProps) {
+export function Cards({ cards, randomCards, transitions }: CardsProps) {
   if (!cards ) {
     return (
       <LoadingContainer>
@@ -30,17 +27,24 @@ export function Cards({ cards, randomCards, transitions, shuffledCards }: CardsP
     );
   }
 
+  const fade = useSpring({
+    from: { opacity: 0 },
+    to: { opacity: 1 },
+  });
+
   return (
-    <Container>
-      {randomCards?.map((card) => (
-        <Card
-          id={card?.id as number}
-          points={getRandomPoint()}
-          name={card?.title as string}
-          image={`${card?.thumbnail.path}.${card?.thumbnail.extension}`}
-          description={card?.description}
-        />
-      ))}
+    <animated.div style={fade}>
+      <Container>
+        {randomCards!?.map(( card: CardType) => (
+          <Card
+            id={card?.id as number}
+            points={card.points}
+            name={card?.title as string}
+            image={`${card?.thumbnail.path}.${card?.thumbnail.extension}`}
+            description={card?.description}
+          />
+        ))}
     </Container>
+    </animated.div>
   )
 }

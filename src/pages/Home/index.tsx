@@ -29,9 +29,6 @@ export function Home() {
     navigate("/board");
   }
 
-  console.log('name: ', name)
-  console.log('userName: ', userName)
-
   return (
     <UserNameProvider>
       <Container>
@@ -50,8 +47,9 @@ export function Home() {
 
             <Button
               buttonType="submit"
-              disabled={!userName || userName.length < 3}
+              disabled={!userName || userName.length < 2}
               color='#72FADC'
+              onClick={() => {}}
             >
               Ver cartas
             </Button>

@@ -14,14 +14,18 @@ export function Buttons({ onShuffleCards, onGetNewCards, newCardsCounter }: Butt
       <Button
         buttonType='button'
         color='#ffffff'
+        fontColor='#333'
         onClick={onShuffleCards}
+        width="100%"
       >
-        Emabaralhar
+        Embaralhar
       </Button>
       <Button
         buttonType='button'
         color='#72FADC'
+        fontColor='#333'
         onClick={onGetNewCards}
+        width="100%"
         disabled={newCardsCounter >=3}
       >
         Puxar nova carta

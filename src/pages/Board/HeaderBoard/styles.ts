@@ -8,14 +8,23 @@ export const Header = styled.header`
   margin-bottom: 40px;
 `;
 
-export const UserName = styled.h2`
-  
+export const UserName = styled.p`
+  font-size: 1.5rem;
+
   span:first-child {
     font-weight: 300;
   }
-  
+
   span:last-child {
     text-transform: capitalize;
     font-weight: 700;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1.2rem;
+  }
+
+  @media (max-width: 425px) {
+    font-size: 1rem;
   }
 `;

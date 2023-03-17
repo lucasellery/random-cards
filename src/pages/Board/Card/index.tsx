@@ -47,13 +47,17 @@ export function Card({ name, image, description, id, points }: CardProps) {
           positions={['top', 'left']}
           padding={10}
           content={(
-            <PopoverContent>{description}</PopoverContent>
+            <>
+              {description && (
+                <PopoverContent>{description}</PopoverContent>
+              )}
+            </>
         )}>
           <span
             onMouseEnter={() => setIsPopoverOpen(true)}
             onMouseLeave={() => setIsPopoverOpen(false)}
           >
-            {abbreviatedDescription}
+            {description ? abbreviatedDescription : 'Mais detalhes em breve.'}
           </span>
         </Popover>
       </Footer>

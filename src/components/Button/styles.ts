@@ -3,21 +3,31 @@ import styled from 'styled-components';
 interface ButtonProps {
   disabled?: boolean;
   color?: string;
+  fontColor?: string;
+  width: string;
 }
 
 export const ButtonContainer = styled.button<ButtonProps>`
-  width: 100%;
+  width: ${props => props.width};
   border: none;
   height: 46px;
   border-radius: 44px;
   padding: 14px 28px;
 
+  display: flex;
+  white-space: wrap;
+  justify-content: center;
+  align-items: center;
+
   background: ${props => (props.disabled ? '#ccc' : props.color)};
 
-  color: #333;
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 100%;
+
+  p {
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 100%;
+    color: ${props => (props.fontColor)};
+  }
 
   transition: all 0.2s ease-in-out;
   cursor: ${props => (props.disabled ? 'not-allowed' : 'pointer')};
@@ -31,6 +41,13 @@ export const ButtonContainer = styled.button<ButtonProps>`
     transition: all 0.2s ease-in-out;
     filter: brightness(90%);
     outline: none;
+  }
+
+  @media only screen and (max-width: 425px) {
+    p {
+      white-space: nowrap;
+      font-size: 0.8rem;
+    }
   }
 `;
 

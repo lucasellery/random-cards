@@ -7,12 +7,17 @@ const colors = {
 };
 
 export const CardContainer = styled.div`
-  height: auto;
-  width: calc(23% - 36px);
+  height: 450px;
+  width: 350px;
   background-color: white;
   box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
   border-radius: 14px;
   overflow: hidden;
+
+  @media only screen and (min-width: 760px) {
+    height: 440px;
+    width: 320px;
+  }
 `;
 
 export const CardHeader = styled.header`
@@ -93,7 +98,6 @@ export const PopoverContent = styled.p`
 
   background-color: #010101;
   padding: 10px;
-  /* border: 1px solid #ccc; */
   border: none;
   border-radius: 5px;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);

@@ -9,7 +9,8 @@ import { Buttons } from './Buttons';
 import { api } from '@/utils/api';
 import { getRandomPoint, shuffleArray } from '@/utils/shuffle';
 import { infoMessage, sucessMessage } from '@/utils/toasts';
-import { Container } from './styles';
+import { Container, ResetContainer } from './styles';
+import { Button } from '@/components/Button';
 
 export function Board() {
   const [cards, setCards] = useState<CardResponse | null>(null);
@@ -19,6 +20,7 @@ export function Board() {
     const storedCards = localStorage.getItem('shuffledCards');
     return storedCards ? JSON.parse(storedCards) : [];
   });
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     handleGetCards();
@@ -35,11 +37,13 @@ export function Board() {
     const hash = CryptoJS.MD5(timestamp + privateKey + publicKey).toString();
 
     try {
+      setLoading(true);
       const response = await api.get(
         `/comics?ts=${timestamp}&apikey=${publicKey}&hash=${hash}`
       );
 
       setCards(response?.data);
+      setLoading(false);
     } catch (error) {
       console.log('error: ', error);
     }
@@ -93,6 +97,11 @@ export function Board() {
     }
   }
 
+  function handleReset() {
+    handleGetCards();
+    setNewCardCounter(0);
+  }
+
   return (
     <>
       <Container>
@@ -103,9 +112,22 @@ export function Board() {
           onGetNewCards={handleGetNewCard}
           newCardsCounter={newCardsCounter}
         />
+        {newCardsCounter >= 3 && (
+          <ResetContainer>
+            <Button
+              buttonType='button'
+              fontColor='white'
+              color="transparent"
+              onClick={handleReset}
+            >
+              Reiniciar
+            </Button>
+          </ResetContainer>
+        )}
         <Cards
           cards={cards}
           randomCards={randomCards}
+          isLoading={loading}
         />
       </Container>
     </>

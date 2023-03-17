@@ -47,6 +47,8 @@ export function Home() {
             buttonType="submit"
             disabled={!userName || userName.length < 2}
             color='#72FADC'
+            fontColor='#333'
+            width='100%'
             onClick={() => {}}
           >
             Ver cartas

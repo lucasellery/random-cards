@@ -1,16 +1,17 @@
-import { Card } from "../Card";
-import { ThreeCircles } from "react-loader-spinner";
-import { Container, LoadingContainer } from "./styles";
-import { CardResponse, CardType } from "@/types/Card";
 import { useSpring, animated } from '@react-spring/web';
+import { ThreeCircles } from "react-loader-spinner";
+import { Card } from "../Card";
+import { CardResponse, CardType } from "@/types/Card";
+import { Container, LoadingContainer } from "./styles";
 
 interface CardsProps {
   cards: CardResponse | null;
   randomCards: CardResponse["data"]["results"];
+  isLoading: boolean;
 }
 
-export function Cards({ cards, randomCards }: CardsProps) {
-  if (!cards ) {
+export function Cards({ cards, randomCards, isLoading }: CardsProps) {
+  if (isLoading ) {
     return (
       <LoadingContainer>
         <ThreeCircles
@@ -30,6 +31,8 @@ export function Cards({ cards, randomCards }: CardsProps) {
     from: { opacity: 0 },
     to: { opacity: 1 },
   });
+
+  console.log(randomCards)
 
   return (
     <animated.div style={fade}>

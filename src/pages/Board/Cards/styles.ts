@@ -2,9 +2,16 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
-  justify-content: space-around;
   flex-flow: row wrap;
   gap: 40px;
+
+  @media only screen and (min-width: 768px) {
+    justify-content: center;
+  }
+
+  @media only screen and (min-width: 1024px) {
+    justify-content: space-evenly;
+  }
 `;
 
 export const CardContainer = styled.div`

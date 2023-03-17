@@ -1,3 +1,4 @@
+import { CSSProperties } from "react";
 import { ButtonContainer } from "./styles";
 
 interface ButtonProps {
@@ -5,6 +6,8 @@ interface ButtonProps {
   buttonType: "button" | "submit" | "reset";
   disabled?: boolean;
   color?: string;
+  fontColor?: string;
+  width?: string;
   onClick: () => void;
 }
 
@@ -13,6 +16,8 @@ export function Button({
   children,
   disabled,
   color,
+  fontColor,
+  width,
   onClick,
 }: ButtonProps) {
   return (
@@ -21,8 +26,10 @@ export function Button({
       disabled={disabled}
       color={color}
       onClick={onClick}
+      fontColor={fontColor}
+      width={width as string}
     >
-      {children}
+      <p>{children}</p>
     </ButtonContainer>
   );
 }

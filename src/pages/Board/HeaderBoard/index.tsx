@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import { Title } from "../../../components/Title";
-import { UserNameContext } from "../../../context/UserContext";
+import { Title } from "@/components/Title";
+import { UserNameContext } from "@/context/UserContext";
 import { Header, UserName } from "./styles";
 
 export function HeaderBoard() {

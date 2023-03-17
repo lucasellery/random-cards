@@ -8,7 +8,13 @@ interface ButtonProps {
   onClick: () => void;
 }
 
-export function Button({ buttonType, children, disabled, color, onClick }: ButtonProps) {
+export function Button({
+  buttonType,
+  children,
+  disabled,
+  color,
+  onClick,
+}: ButtonProps) {
   return (
     <ButtonContainer
       type={buttonType}
@@ -18,5 +24,5 @@ export function Button({ buttonType, children, disabled, color, onClick }: Butto
     >
       {children}
     </ButtonContainer>
-  )
+  );
 }

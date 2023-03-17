@@ -1,16 +1,15 @@
 import { Card } from "../Card";
-import { Container, LoadingContainer } from "./styles";
-import { CardResponse, CardType } from "../../../types/Card";
 import { ThreeCircles } from "react-loader-spinner";
+import { Container, LoadingContainer } from "./styles";
+import { CardResponse, CardType } from "@/types/Card";
 import { useSpring, animated } from '@react-spring/web';
 
 interface CardsProps {
   cards: CardResponse | null;
   randomCards: CardResponse["data"]["results"];
-  transitions: any;
 }
 
-export function Cards({ cards, randomCards, transitions }: CardsProps) {
+export function Cards({ cards, randomCards }: CardsProps) {
   if (!cards ) {
     return (
       <LoadingContainer>
@@ -37,6 +36,7 @@ export function Cards({ cards, randomCards, transitions }: CardsProps) {
       <Container>
         {randomCards!?.map(( card: CardType) => (
           <Card
+            key={card.id}
             id={card?.id as number}
             points={card.points}
             name={card?.title as string}
@@ -44,7 +44,7 @@ export function Cards({ cards, randomCards, transitions }: CardsProps) {
             description={card?.description}
           />
         ))}
-    </Container>
+      </Container>
     </animated.div>
   )
 }

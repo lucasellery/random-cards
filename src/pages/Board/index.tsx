@@ -1,24 +1,24 @@
 import { useEffect, useState } from 'react';
-import { useTransition, animated } from '@react-spring/web';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import CryptoJS from "crypto-js";
-import { Button } from '../../components/Button';
-import { CardResponse, CardType } from '../../types/Card';
+import { CardResponse, CardType } from '@/types/Card';
 import { Cards } from './Cards';
 import { HeaderBoard } from './HeaderBoard';
-import { ButtonsContainer, Container } from './styles';
-import { api } from '../../utils/api';
-import { getRandomPoint, shuffleArray } from '../../utils/shuffle';
-import { toast, ToastContainer } from 'react-toastify';
+import { Buttons } from './Buttons';
+import { api } from '@/utils/api';
+import { getRandomPoint, shuffleArray } from '@/utils/shuffle';
+import { infoMessage, sucessMessage } from '@/utils/toasts';
+import { Container } from './styles';
 
 export function Board() {
   const [cards, setCards] = useState<CardResponse | null>(null);
+  const [newCardsCounter, setNewCardCounter] = useState(0);
   const [randomCards, setRandomCards] = useState<CardResponse["data"]["results"]>([]);
   const [shuffledCards, setShuffledCards] = useState<number[]>(() => {
     const storedCards = localStorage.getItem('shuffledCards');
     return storedCards ? JSON.parse(storedCards) : [];
   });
-  const [newCardsCounter, setNewCardCounter] = useState(0);
 
   useEffect(() => {
     handleGetCards();
@@ -59,12 +59,6 @@ export function Board() {
     }
   }
 
-  const transitions = useTransition(randomCards, {
-    from: { transform: 'translate3d(0,-40px,0)' },
-    enter: { transform: 'translate3d(0,0px,0)' },
-    trail: 100,
-  });
-
   function handleSaveShuffledCards() {
     const shuffledCards = shuffleArray(randomCards);
     setRandomCards(shuffledCards);
@@ -83,40 +77,18 @@ export function Board() {
   }
 
   function handleGetNewCard() {
-
     if (cards) {
-      if (newCardsCounter >= 3) {
-        return;
-      }
+      if (newCardsCounter >= 3) return;
 
       const newCard = generateNewCard(randomCards, cards?.data?.results);
 
       setRandomCards((prevState: any) => [...prevState, newCard]);
-
       setNewCardCounter((prevState) => prevState + 1);
 
       if (newCardsCounter >= 2) {
-        toast.success(`Parabéns, você alcançou o limite de cartas! 👏`, {
-          position: "top-left",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
-        });
+        sucessMessage();
       } else if (newCardsCounter < 3) {
-        toast.info(`Você puxou uma carta! ${Math.abs(newCardsCounter - 2)} cartas restantes.`, {
-          position: "top-left",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
-        });
+        infoMessage({ newCardsCounter });
       }
     }
   }
@@ -126,27 +98,14 @@ export function Board() {
       <Container>
         <HeaderBoard />
         <ToastContainer />
-        <ButtonsContainer>
-          <Button
-            buttonType='button'
-            color='#ffffff'
-            onClick={handleSaveShuffledCards}
-          >
-            Emabaralhar
-          </Button>
-          <Button
-            buttonType='button'
-            color='#72FADC'
-            onClick={handleGetNewCard}
-            disabled={newCardsCounter >=3}
-          >
-            Puxar nova carta
-          </Button>
-        </ButtonsContainer>
+        <Buttons
+          onShuffleCards={handleSaveShuffledCards}
+          onGetNewCards={handleGetNewCard}
+          newCardsCounter={newCardsCounter}
+        />
         <Cards
           cards={cards}
           randomCards={randomCards}
-          transitions={transitions}
         />
       </Container>
     </>

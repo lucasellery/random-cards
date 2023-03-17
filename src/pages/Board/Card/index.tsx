@@ -1,7 +1,8 @@
-import { CardContainer, CardHeader, Footer, Logo, Main, Points, PopoverContent } from "./styles";
-import { Popover } from 'react-tiny-popover'
 import { useState } from "react";
+import { Popover } from 'react-tiny-popover'
 import { useSpring, animated } from "@react-spring/web";
+import { CardContainer, CardHeader, Footer, Main, Points, PopoverContent } from "./styles";
+import { LogoAbbr } from "@/components/LogoAbbr";
 
 export interface CardProps {
   id: number;
@@ -13,6 +14,7 @@ export interface CardProps {
 
 export function Card({ name, image, description, id, points }: CardProps) {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+  const abbreviatedDescription = description?.length! > 100 && description?.slice(0, 90).concat('...');
 
   const AnimatedContainer = animated(CardContainer);
 
@@ -25,10 +27,7 @@ export function Card({ name, image, description, id, points }: CardProps) {
   return (
     <AnimatedContainer key={id} style={fade}>
       <CardHeader>
-        <Logo>
-          <b>R</b>
-          <span>C</span>
-        </Logo>
+        <LogoAbbr />
         <Points>
           {points}
         </Points>
@@ -49,12 +48,12 @@ export function Card({ name, image, description, id, points }: CardProps) {
           padding={10}
           content={(
             <PopoverContent>{description}</PopoverContent>
-          )}>
+        )}>
           <span
             onMouseEnter={() => setIsPopoverOpen(true)}
             onMouseLeave={() => setIsPopoverOpen(false)}
           >
-            {description?.length! > 100 && description?.slice(0, 90).concat('...')}
+            {abbreviatedDescription}
           </span>
         </Popover>
       </Footer>

@@ -31,8 +31,8 @@ export function Board() {
   }, [cards]);
 
   async function handleGetCards() {
-    const publicKey = "51dfc0a36eceadb357f1c62827bcf268";
-    const privateKey = "90d0310f152d5cb0dfafcf1feaba857803587706";
+    const publicKey = import.meta.env.VITE_API_PUBLIC_KEY;
+    const privateKey = import.meta.env.VITE_API_PRIVATE_KEY;
     const timestamp = Date.now().toString();
     const hash = CryptoJS.MD5(timestamp + privateKey + publicKey).toString();
 

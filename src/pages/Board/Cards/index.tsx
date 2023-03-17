@@ -32,8 +32,6 @@ export function Cards({ cards, randomCards, isLoading }: CardsProps) {
     to: { opacity: 1 },
   });
 
-  console.log(randomCards)
-
   return (
     <animated.div style={fade}>
       <Container>

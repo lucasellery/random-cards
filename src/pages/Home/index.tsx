@@ -1,10 +1,10 @@
 import { createContext, useContext, useState } from 'react';
-import { Button } from '../../components/Button';
-import { Title } from '../../components/Title';
-import { Container, Content, TitleContainer } from './styles';
-import { TextInput } from './TextInput';
 import { useNavigate } from "react-router-dom";
-import { UserNameContext, UserNameProvider } from '../../context/UserContext';
+import { Button } from '@/components/Button';
+import { Title } from '@/components/Title';
+import { TextInput } from './TextInput';
+import { UserNameContext } from '@/context/UserContext';
+import { Container, Content, TitleContainer } from './styles';
 
 export const UserContext = createContext('');
 
@@ -23,41 +23,36 @@ export function Home() {
   function handleSubmitText(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setUserName(name);
-
     localStorage.setItem('userName', name);
 
     navigate("/board");
   }
 
-  console.log('name: ', name)
-  console.log('userName: ', userName)
-
   return (
-    <UserNameProvider>
-      <Container>
-        <Content>
-          <TitleContainer>
-            <Title />
-          </TitleContainer>
+    <Container>
+      <Content>
+        <TitleContainer>
+          <Title />
+        </TitleContainer>
 
-          <form onSubmit={handleSubmitText}>
-            <TextInput
-              label="Nome"
-              placeholder='Digite seu nome'
-              value={name}
-              onChange={handleChangeName}
-            />
+        <form onSubmit={handleSubmitText}>
+          <TextInput
+            label="Nome"
+            placeholder='Digite seu nome'
+            value={name}
+            onChange={handleChangeName}
+          />
 
-            <Button
-              buttonType="submit"
-              disabled={!userName || userName.length < 3}
-            >
-              Ver cartas
-            </Button>
-          </form>
-
-        </Content>
-      </Container>
-    </UserNameProvider>
+          <Button
+            buttonType="submit"
+            disabled={!userName || userName.length < 2}
+            color='#72FADC'
+            onClick={() => {}}
+          >
+            Ver cartas
+          </Button>
+        </form>
+      </Content>
+    </Container>
   );
 }

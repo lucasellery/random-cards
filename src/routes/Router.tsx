@@ -2,7 +2,6 @@ import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import { Board } from "../pages/Board";
 
-
 export const router = createBrowserRouter([
   {
     path: "/",
